@@ -1,25 +1,25 @@
-# 💊 MediBot India — Local Medical AI Assistant
+# 💊 MediBot Jaipur — Local Medical AI Assistant
 
 <div align="center">
 
-![MediBot Banner](https://img.shields.io/badge/MediBot-India-blue?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyUzYuNDggMjIgMTIgMjIgMjIgMTcuNTIgMjIgMTIgMTcuNTIgMiAxMiAyWk0xMyAxN0gxMVYxMUgxM1YxN1pNMTMgOUgxMVY3SDEzVjlaIi8+PC9zdmc+)
 ![Python](https://img.shields.io/badge/Python-3.10+-green?style=for-the-badge&logo=python)
 ![Mistral](https://img.shields.io/badge/Mistral-7B-orange?style=for-the-badge)
 ![LangChain](https://img.shields.io/badge/LangChain-Latest-purple?style=for-the-badge)
-![Offline](https://img.shields.io/badge/Runs-100%25%20Offline-red?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+![ChromaDB](https://img.shields.io/badge/ChromaDB-Vector_DB-blue?style=for-the-badge)
+![Gradio](https://img.shields.io/badge/Gradio-UI-red?style=for-the-badge)
+![Offline](https://img.shields.io/badge/Runs-100%25_Offline-success?style=for-the-badge)
 
-### 🤖 Ask anything about Indian medicines — powered by local AI, zero internet needed!
+### 🤖 Ask about Indian medicines + find nearest medical stores in Jaipur — powered by local AI, zero internet needed!
 
-[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Usage](#-usage) • [Architecture](#-architecture) • [Tech Stack](#-tech-stack)
+[Features](#-features) • [Demo](#-demo) • [Installation](#-installation) • [Architecture](#-architecture) • [Tech Stack](#-tech-stack) • [Datasets](#-datasets)
 
 </div>
 
 ---
 
-## 🌟 What is MediBot India?
+## 🌟 What is MediBot Jaipur?
 
-> **MediBot India** is a fully offline, privacy-first Medical AI Assistant that answers questions about **253,973 Indian medicines** and **16,407 medical Q&A pairs** — all running locally on your laptop using Mistral 7B.
+> **MediBot Jaipur** is a fully offline, privacy-first Medical AI Assistant that answers questions about **253,973 Indian medicines** and helps you find the **nearest medical store** from **383 verified Jaipur pharmacies** — all running locally on your laptop using Mistral 7B.
 
 No API keys. No internet. No data leaving your machine. Just pure AI magic. 🔥
 
@@ -29,39 +29,45 @@ No API keys. No internet. No data leaving your machine. Just pure AI magic. 🔥
 
 | Feature | Description |
 |---|---|
-| 💊 **253K+ Medicines** | Complete A-Z Indian medicine database |
+| 💊 **253K+ Medicines** | Complete A-Z Indian medicine database with prices in ₹ |
+| 📍 **383 Jaipur Stores** | Find nearest medical stores by area name |
 | 🧠 **RAG Architecture** | Retrieval Augmented Generation for accurate answers |
 | 🔒 **100% Offline** | No internet, no API costs, no data privacy concerns |
-| ⚡ **Fast Search** | MiniLM embeddings search 361K chunks in milliseconds |
+| ⚡ **Fast Search** | MiniLM embeddings search 323K chunks in milliseconds |
+| 🗺️ **Google Maps Links** | Direct links to stores on Google Maps |
+| 📞 **Store Details** | Phone, timings, delivery, ratings for each store |
 | 🎨 **Beautiful UI** | Dark-themed Gradio interface with quick-question buttons |
 | 🤖 **Mistral 7B** | Powerful 7B parameter LLM running on local GPU |
-| 📊 **361K Chunks** | Massive knowledge base for comprehensive answers |
 
 ---
 
 ## 🎬 Demo
 
 ```
-User    → "What is Paracetamol used for?"
+📍 Area: Malviya Nagar
+💊 Question: "medicine for fever"
 
-MediBot → "Paracetamol, also known as acetaminophen, is commonly 
-           used as a pain reliever and fever reducer. It works by 
-           blocking the production of certain chemicals in the body 
-           that cause pain and fever...
-           
-           ⚠️ Please consult a real doctor for proper diagnosis!"
-```
+MediBot →
+"For fever, common medicines include:
+ 1. Paracetamol (500mg) - ₹15-30
+ 2. Dolo 650 - ₹30
+ 3. Calpol - ₹25
 
-```
-User    → "Price of Augmentin 625 in India?"
+ Always consult a real doctor before use.
 
-MediBot → "Augmentin 625 Duo Tablet is manufactured by Glaxo 
-           SmithKline Pharmaceuticals Ltd. 
-           Price: ₹223.42
-           Pack Size: Strip of 10 tablets
-           Composition: Amoxycillin (500mg) + Clavulanic Acid (125mg)
-           
-           ⚠️ Please consult a real doctor before use!"
+ 🏥 Nearby Medical Stores in Malviya Nagar:
+
+ 1. Apollo Pharmacy (Malviya Nagar)
+    ⭐ 3.4/5 (302 reviews)
+    🕐 7AM - 11PM | ❌ No delivery
+    📞 9198488707
+    🗺️ maps.google.com/?q=26.86,75.81
+
+ 2. City Med House (Malviya Nagar)
+    ⭐ 4.7/5 (2790 reviews)
+    🕐 7AM - 9PM | 🚚 Delivery: 5km
+    📞 9181639077
+    🗺️ maps.google.com/?q=26.86,75.80"
 ```
 
 ---
@@ -72,7 +78,7 @@ MediBot → "Augmentin 625 Duo Tablet is manufactured by Glaxo
 - Python 3.10+
 - NVIDIA GPU (8GB+ VRAM recommended)
 - [Ollama](https://ollama.com/download) installed
-- 8GB+ RAM
+- 16GB+ RAM
 
 ### Step 1 — Clone the repo
 ```bash
@@ -82,7 +88,7 @@ cd MediBot
 
 ### Step 2 — Install dependencies
 ```bash
-pip install langchain langchain-community ollama gradio pymupdf python-docx chromadb sentence-transformers pandas
+pip install -r requirements.txt
 ```
 
 ### Step 3 — Pull Mistral model
@@ -91,22 +97,45 @@ ollama pull mistral
 ```
 
 ### Step 4 — Download datasets
-Download these datasets and place in `data/` folder:
+Download these and place in `data/` folder:
 - [A-Z Medicines Dataset of India](https://www.kaggle.com/datasets/shudhanshusingh/az-medicine-dataset-of-india) → `A_Z_medicines_dataset_of_india.csv`
 - [Medical Q&A Dataset](https://www.kaggle.com/datasets/keivalya/medquad-medicinal-question-answer-dataset) → `medDataset_processed.csv`
+- Jaipur Medical Stores Dataset → `jaipur_medical_stores_ml.xlsx`
 
-### Step 5 — Build vectorstore
+### Step 5 — Build vectorstore (one time only!)
 ```bash
 # Open ingest.ipynb in Jupyter and run all cells
-# This takes ~26 minutes (one time only!)
+# This takes ~26 minutes — only needed ONCE!
 jupyter notebook ingest.ipynb
 ```
 
 ### Step 6 — Launch MediBot!
 ```bash
-# Run the final cell in the notebook OR
-python app.py
+# Open launch.ipynb and run all 4 cells
+jupyter notebook launch.ipynb
 # Opens at http://127.0.0.1:7860
+```
+
+---
+
+## 📁 Project Structure
+
+```
+MediBot/
+│
+├── 📓 launch.ipynb          ← Run this every day! (4 cells, ~2 mins)
+├── 📁 setup/
+│   └── ingest.ipynb         ← Run once to build vectorstore
+│
+├── 📁 data/
+│   ├── A_Z_medicines_dataset_of_india.csv
+│   ├── medDataset_processed.csv
+│   └── jaipur_medical_stores_ml.xlsx
+│
+├── 📁 vectorstore/          ← Auto-generated (not on GitHub)
+├── 📄 requirements.txt
+├── 📄 .gitignore
+└── 📄 README.md
 ```
 
 ---
@@ -115,35 +144,39 @@ python app.py
 
 ```
 ┌─────────────────────────────────────────────────────────┐
-│                    USER QUESTION                         │
-│              "What is Paracetamol for?"                  │
-└────────────────────────┬────────────────────────────────┘
-                         │
+│              USER INPUT                                  │
+│   Area: "Malviya Nagar"                                 │
+│   Question: "medicine for fever"                         │
+└──────────────┬──────────────────────────┬───────────────┘
+               │                          │
+               ▼                          ▼
+┌──────────────────────┐    ┌─────────────────────────────┐
+│   RAG PIPELINE       │    │   LOCATION ENGINE           │
+│                      │    │                             │
+│  MiniLM Embeddings   │    │  Search 383 Jaipur stores   │
+│         ↓            │    │  by area name / GPS         │
+│  ChromaDB Search     │    │  using GeoPy distance       │
+│         ↓            │    │         ↓                   │
+│  Top 8 relevant      │    │  Top 3 nearest stores       │
+│  medical chunks      │    │  with full details          │
+└──────────┬───────────┘    └──────────────┬──────────────┘
+           │                               │
+           └──────────────┬────────────────┘
+                          ▼
+            ┌─────────────────────────┐
+            │      MISTRAL 7B         │
+            │  Reads medicine context │
+            │  + store information    │
+            │  Generates full answer  │
+            │  Running on RTX GPU     │
+            └────────────┬────────────┘
                          ▼
-┌─────────────────────────────────────────────────────────┐
-│                  MiniLM EMBEDDINGS                       │
-│         Converts question → [0.22, -0.88, ...]          │
-└────────────────────────┬────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│                  CHROMADB SEARCH                         │
-│        Finds top 5 most relevant chunks                  │
-│        from 361,052 medical document chunks              │
-└────────────────────────┬────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│                  MISTRAL 7B LLM                          │
-│    Reads retrieved context + generates smart answer      │
-│    Running locally on your NVIDIA GPU                    │
-└────────────────────────┬────────────────────────────────┘
-                         │
-                         ▼
-┌─────────────────────────────────────────────────────────┐
-│                  GRADIO UI                               │
-│         Beautiful dark-themed chat interface             │
-└─────────────────────────────────────────────────────────┘
+            ┌─────────────────────────┐
+            │      GRADIO UI          │
+            │  Dark themed chat       │
+            │  Quick question buttons │
+            │  Location input box     │
+            └─────────────────────────┘
 ```
 
 ---
@@ -155,34 +188,55 @@ python app.py
 | **LLM** | Mistral 7B via Ollama | Best 7B model, runs on 8GB VRAM |
 | **Embeddings** | MiniLM (sentence-transformers) | 50x faster than LLM embeddings |
 | **Vector DB** | ChromaDB | Fast similarity search |
-| **Framework** | LangChain | Connects all components |
-| **UI** | Gradio | Beautiful web interface |
+| **Location** | GeoPy | Distance calculation between GPS coordinates |
+| **Framework** | LangChain | Connects all AI components |
+| **UI** | Gradio | Beautiful dark-themed web interface |
 | **Language** | Python 3.10+ | ML ecosystem |
+| **GPU** | NVIDIA RTX 4050 | Local GPU inference |
 
 ---
 
-## 📊 Dataset Stats
+## 📊 Datasets
 
 ```
 Dataset 1 — A-Z Medicines of India
 ├── Total medicines    : 253,973
-├── Columns            : name, price, manufacturer, composition
+├── Key columns        : name, price(₹), manufacturer, composition
 └── Source             : Kaggle
 
 Dataset 2 — Medical Q&A
 ├── Total Q&A pairs    : 16,407
-├── Columns            : question, answer, type
+├── Key columns        : question, answer, type
 └── Source             : Kaggle
 
-Combined
+Dataset 3 — Jaipur Medical Stores
+├── Total stores       : 383
+├── Key columns        : name, address, locality, lat/lon,
+│                        phone, timings, delivery, rating
+└── Coverage           : All major Jaipur localities
+
+Combined Knowledge Base
 ├── Total documents    : 270,380
-├── After chunking     : 361,052 chunks
+├── After chunking     : 323,516 chunks
 └── Embedding model    : all-MiniLM-L6-v2
 ```
 
 ---
 
-## 💡 Sample Questions to Try
+## 📍 Jaipur Areas Covered
+
+```
+Malviya Nagar    Vaishali Nagar    C-Scheme
+Mansarovar       Tonk Road         Ajmer Road
+Sanganer         Jagatpura         Pratap Nagar
+Civil Lines      Raja Park         Shyam Nagar
+Nirman Nagar     Sodala            Vidhyadhar Nagar
+...and many more!
+```
+
+---
+
+## 💡 Sample Questions
 
 ```
 💊 Medicine Info
@@ -192,61 +246,66 @@ Combined
 
 💰 Pricing
 → "Price of Dolo 650 in India?"
-→ "Cheapest fever medicines in India?"
+→ "Cheapest fever medicines?"
 
 ⚠️ Side Effects
 → "Side effects of Azithromycin?"
 → "Is Ibuprofen safe for children?"
 
-🏥 Medical Q&A
-→ "What are symptoms of diabetes?"
-→ "How to treat high blood pressure?"
+📍 With Location (Jaipur specific)
+→ Area: Vaishali Nagar | "medicine for cold"
+→ Area: C-Scheme | "where can I get Metformin?"
+→ Area: Mansarovar | "nearest 24x7 pharmacy?"
 ```
 
 ---
 
-## ⚠️ Disclaimer
+## 🗓️ Daily Usage
 
-> **MediBot India is for educational purposes only.**
-> Always consult a qualified medical professional before taking any medicine.
-> The creators are not responsible for any medical decisions made based on this tool.
+```bash
+# Step 1 — Start Ollama (keep terminal open)
+ollama serve
 
----
+# Step 2 — Open launch notebook
+jupyter notebook launch.ipynb
 
-## 🗂️ Project Structure
+# Step 3 — Run All Cells (Ctrl+F9)
+# Takes ~2 minutes total
 
-```
-MediBot/
-│
-├── 📓 ingest.ipynb          ← Main notebook (run this!)
-├── 📄 app.py                ← Standalone Gradio app
-├── 📁 data/                 ← CSV datasets (download from Kaggle)
-│   ├── A_Z_medicines_dataset_of_india.csv
-│   └── medDataset_processed.csv
-├── 📁 vectorstore/          ← Auto-generated (not on GitHub)
-├── 📄 requirements.txt      ← Python dependencies
-├── 📄 .gitignore            ← Excludes large files
-└── 📄 README.md             ← You are here!
+# Step 4 — Open browser
+# Go to http://127.0.0.1:7860
 ```
 
 ---
 
 ## 🏆 What Makes This Special
 
-- ✅ **No API costs** — completely free to run
+- ✅ **No API costs** — completely free to run forever
 - ✅ **Privacy first** — your medical questions never leave your laptop
 - ✅ **Indian medicine focused** — built specifically for Indian medicines with ₹ prices
-- ✅ **Massive knowledge base** — 361K chunks of medical knowledge
+- ✅ **Jaipur specific** — 383 verified local pharmacies with real contact details
+- ✅ **Location aware** — finds nearest store in your area instantly using GPS data
+- ✅ **Massive knowledge base** — 323K chunks of medical knowledge
 - ✅ **Production ready UI** — looks and feels like a real product
-- ✅ **Reproducible** — anyone can clone and rebuild in 26 minutes
+- ✅ **Fully reproducible** — anyone can clone and rebuild in ~30 minutes
+
+---
+
+## ⚠️ Disclaimer
+
+> **MediBot Jaipur is for educational purposes only.**
+> Always consult a qualified medical professional before taking any medicine.
+> Store information may not be 100% accurate — always verify before visiting.
+> The creators are not responsible for any medical decisions made based on this tool.
 
 ---
 
 ## 👨‍💻 Author
 
 **Jashan Jindal**
+- B.Tech CS (AI & ML) — JECRC University, Jaipur
 - GitHub: [@Jashanjindal](https://github.com/Jashanjindal)
-- Project: [MediBot India](https://github.com/Jashanjindal/MediBot)
+- LinkedIn: [Jashan Jindal](https://linkedin.com/in/jashanjindal)
 
 ---
 
@@ -258,8 +317,10 @@ MIT License — free to use, modify, and distribute!
 
 <div align="center">
 
-**Built with ❤️ in India 🇮🇳**
+**Built with ❤️ in Jaipur, Rajasthan 🇮🇳**
 
 *If this helped you, give it a ⭐ on GitHub!*
+
+*"Built a complete offline Medical AI with RAG architecture, local LLM inference, and location-based pharmacy search — running 100% on my laptop!"*
 
 </div>
