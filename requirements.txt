@@ -1,3 +1,30 @@
-langchain 
-panda 
-chromdb
+# Core ML & LangChain
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
+
+# LLM & Embeddings
+ollama
+sentence-transformers
+
+# Vector Database
+chromadb
+
+# UI
+gradio
+
+# Data Processing
+pandas
+openpyxl
+
+# Location
+geopy
+
+# File handling
+pymupdf
+python-docx
+
+# Utilities
+torch
+transformers
